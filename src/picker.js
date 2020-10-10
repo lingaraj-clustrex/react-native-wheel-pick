@@ -28,9 +28,10 @@ export default class Picker extends Component {
   };
 
   static defaultProps = {
-    textColor: '#333',
-    textSize: 26,
-    itemSpace: 20,
+    textColor: 'white',
+    textSize: 24,
+    borderColor: 'black',
+    itemSpace: 30,
     itemStyle: null,
     style: null,
   };
@@ -52,14 +53,17 @@ export default class Picker extends Component {
         {...props}
         style={[styles.picker, style]}
         selectedValue={this.state.selectedValue}
+        itemStyle={{borderColor: 'black'}}
         onValueChange={this.handleChange}
       >
         {pickerData.map((data, index) => (
           <PickerItem
-            key={index}
-            value={typeof data.value !== 'undefined' ? data.value : data}
-            label={typeof data.label !== 'undefined' ? data.label : data.toString()}
-          />
+            key={data.filename}
+            preview={data.preview}
+            url={data.url}
+            value={typeof data.value !== 'undefined' ? data.value : data.filename}
+            label={typeof data.label !== 'undefined' ? data.label : data.description.toString()}
+          ></PickerItem>
         ))}
       </WheelCurvedPicker>
     );
